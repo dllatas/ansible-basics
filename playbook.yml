@@ -1,0 +1,14 @@
+---
+
+- name: run on localhost
+  hosts: localhost
+  become: yes
+  tasks:
+
+  - name: Update repositories cache
+    apt:
+      update_cache: yes
+
+  - name: install git
+    apt: 
+      name: git
