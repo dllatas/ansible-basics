@@ -9,6 +9,12 @@
     apt:
       update_cache: yes
 
+  - name: Upgrade repository
+    command: apt upgrade -y
+
+  - name: Upgrade repository
+    command: apt autoremove
+
   - name: install git
     apt: 
       name: git
