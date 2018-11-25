@@ -1,0 +1,5 @@
+---
+# This playbook will install docker in my machine
+- hosts: local
+  roles:
+  - role: angstwad.docker_ubuntu

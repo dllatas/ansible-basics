@@ -1,0 +1,11 @@
+---
+- hosts: local
+  tasks:
+  - name: Install latest nodejs version using nvm
+    shell: "source ~/.nvm/nvm.sh && nvm install node && node --version"
+    args:
+            executable: /bin/bash
+            #- name: Check which node version was installed
+            #    shell: node --version
+            #    args:
+            #            executable: /bin/bash

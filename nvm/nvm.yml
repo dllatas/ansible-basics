@@ -1,0 +1,29 @@
+---
+- hosts: local
+  tasks:
+  - name: Install a list of dependencies for nvm
+    become: true
+    apt:
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - build-essential
+      - libssl-dev
+      - curl
+      - git-core
+  - name: Create the directory for nvm
+    file:
+      path: ~/.nvm
+      state: directory
+      mode: 0755
+  - name: Clone nvm github repo
+    git:
+      repo: 'https://github.com/creationix/nvm.git'
+      dest: ~/.nvm
+      clone: yes
+  #- name: Source nvm script
+  #  shell: echo "\n. ~/.nvm/nvm.sh" >> ~/.bashrc && source ~/.bashrc
+  - name: Source nvm script
+    shell: source ~/.nvm/nvm.sh
+    args:
+      executable: /bin/bash
