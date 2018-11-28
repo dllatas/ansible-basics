@@ -1,0 +1,33 @@
+---
+
+- name: run on localhost
+  hosts: localhost
+  become: yes
+  tasks:
+
+  - name: Install Wget
+    apt:
+      name: wget
+
+  - name: Download Golang for Linux
+    get_url:
+      url: https://dl.google.com/go/go1.11.2.linux-amd64.tar.gz            
+      dest: ~/Downloads
+      mode: 0440
+
+  - name: Extract Golang into /usr/local
+    unarchive:
+      src: ~/Downloads/go1.11.1.linux-amd64.tar.gz
+      dest: /usr/local
+
+  - name: Add /usr/local/go into the PATH
+    lineinfile:
+      path: /etc/profile
+      line: 'export PATH=$PATH:/usr/local/go/bin'
+      insertafter: EOF
+      state: present
+
+  - name: Source the profile file
+    shell: source /etc/profile
+    args: 
+      executable: /bin/bash
